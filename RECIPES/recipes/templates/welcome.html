@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'header.html' %}
+
+<body>
+  <header>
+    <nav class="navbar sticky-top navbar-light bg-primary">
+      <a class="navbar-brand" href="/success">New recipes</a>
+      <h2 class="text-center">Welcome, {{userInfo[0]['firstname']}}</h2>
+      <h3>Let's get cooking</h3>
+      <a href="/logout" class="btn btn-info">Log out</a>
+    </nav>
+
+  </header>
+  <div class="container mt-5">
+
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+    <p class="alert alert-warning "> {{message}}</p>
+    {% endfor %} {% endif %} {% endwith %}
+
+    <h3 class="text-center">Trip Buddy</h3>
+    <!-- userQueryResult: {{userQueryResult}} -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Description</th>
+          <th scope="col">Travel Start Date</th>
+          <th scope="col">Travel End Date</th>
+          <th scope="col">Plan</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% for item in tripPlanResults %}
+         
+        <tr> 
+            <td><a href="/view/{{item['id']}}">{{item['Plan']}}</a></td>
+          
+          <td>{{item['StartDate']}}</td>
+          <td>{{item['EndDate']}}</td>
+          <td>
+              {{item['Description']}}</td>
+          
+          <td><a href="/cancel/{{item['id']}}" class="action">Cancel</a>
+         
+          {% if userInfo[0]['id'] == item['user_id'] %}
+            <a href="/delete/{{item['id']}}" >Delete</a>
+          {% endif %}
+          </td>
+     
+        </tr>
+        {% endfor %}
+
+      {% if  tripsIJoinedResults | length > 0 %}
+        {% for item in tripsIJoinedResults %}
+        <tr>
+          <td>
+            <a href="/view/{{item['id']}}">{{item['Plan']}}</a>
+          </td>
+
+          <td>{{item['StartDate'].strftime('%m-%d-%Y')}}</td>
+          <td>{{item['EndDate'].strftime('%m-%d-%Y')}}</td>
+          <td>
+            {{item['Description']}}</td>
+
+          <td>
+            <a href="/cancel/{{item['joinTrip.id']}}" class="action">Cancel</a>
+            {% if userInfo[0]['id'] == item['user_id'] %}
+            <a href="/delete/{{item['id']}}">Delete</a>
+            {% endif %}
+          </td>
+
+        </tr>
+        {% endfor %} {% endif %}
+      </tbody>
+    </table> 
+
+
+    <h3 class="text-center">Other users info</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Travel Start Date</th>
+          <th scope="col">Travel End Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        
+        {% if otherUsersInfoResults | length > 0 %}
+          {% for item in otherUsersInfoResults %}
+      
+        <tr> 
+            <td><a href="/view/{{item['id']}}">{{item['Plan']}}</a></td>
+            <td>{{item['StartDate'].strftime('%m-%d-%Y')}}</td>
+            <td>{{item['EndDate'].strftime('%m-%d-%Y')}}</td>
+          <td><a href="/jointrip/{{item['id']}}" >Join</a></td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+
+
+  </div>
+
+ 
+  
+  </div>
+</body>
+
+</html>

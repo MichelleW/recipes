@@ -1,0 +1,58 @@
+
+header a{
+  text-decoration: none;
+}
+.message-text{
+  display: inline-block;
+  width: 80%;
+  vertical-align: top;
+  padding: 10px;
+}
+
+.icon-trash,.icon-trash:hover{
+  vertical-align: top;
+  margin-left: 20px;
+}
+.icon-trash:hover{
+  color:#369;
+  margin-left: 20px;
+}
+
+.navbar-light .navbar-brand, .navbar {
+  color: white;
+}
+textarea{
+width: 88%;
+vertical-align: top;
+}
+label{
+font-weight: bold;
+}
+
+/* temporarily reseting container size  */
+.container{
+max-width: 900px;
+}
+.message{
+width: 100%;
+background-color: #eee;
+margin-bottom: 10px;
+padding: 20px;
+}
+.message a{
+text-decoration: underline;
+}
+.message p{
+margin-top:10px;
+}
+.like-box{
+display: inline-block; 
+vertical-align: top;
+}
+.like-box a{
+text-decoration: none;
+}
+header a{
+color: white;
+text-decoration: underline;
+}
