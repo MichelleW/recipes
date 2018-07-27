@@ -7,8 +7,6 @@ app.secret_key = "bigIsSecret!"
 from recipes.config.mysqlconnection import connectToMySQL
 mysql = connectToMySQL('tripplanner')
 
- 
-
 from recipes.controllers.recipes import Recipes
 recipes = Recipes()
 
@@ -31,3 +29,9 @@ def login():
 def success():
   print('msg from success route')
   return recipes.success()
+
+
+@app.route('/register', methods=['POST'])
+def register():
+   formData = request.form
+   return recipes.registration(formData)

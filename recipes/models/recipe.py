@@ -33,6 +33,13 @@ class Recipe():
     query = "select * from travelPlans join joinTrip on travelPlans.id = joinTrip.travelPlan_id WHERE joiner_id not in (%(sessionid)s);"
     return mysql.query_db(query,data)
 
+  def registerUser(self,data):
+    query = "INSERT INTO tripplanner.users (firstname, lastname, email,password,created_at,updated_at) VALUES (%(fname)s, %(lname)s, %(email)s,%(password)s,NOW(),NOW());"
+    return mysql.query_db(query,data)
+
+  def checkExistUsers(self,data):
+    query = "SELECT * FROM users WHERE email= %(email)s;"
+    return mysql.query_db(query,data)
 
 
 
