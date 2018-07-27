@@ -6,8 +6,7 @@
   <header>
     <nav class="navbar sticky-top navbar-light bg-primary">
       <a class="navbar-brand" href="/success">New recipes</a>
-      <h2 class="text-center">Welcome, {{userInfo[0]['firstname']}}</h2>
-      <h3>Let's get cooking</h3>
+      <h2 class="text-center">{{storeResults['userInfoResults'][0]['firstname']}}, <small>let's get cooking</small></h2>
       <a href="/logout" class="btn btn-info">Log out</a>
     </nav>
 
@@ -19,7 +18,8 @@
     {% endfor %} {% endif %} {% endwith %}
 
     <h3 class="text-center">Trip Buddy</h3>
-    <!-- userQueryResult: {{userQueryResult}} -->
+<!-- {{storeResults}} -->
+    
     <table class="table">
       <thead>
         <tr>
@@ -32,7 +32,7 @@
       </thead>
       <tbody>
 
-          {% for item in tripPlanResults %}
+          {% for item in storeResults["tripPlanResults"] %}
          
         <tr> 
             <td><a href="/view/{{item['id']}}">{{item['Plan']}}</a></td>
@@ -44,7 +44,7 @@
           
           <td><a href="/cancel/{{item['id']}}" class="action">Cancel</a>
          
-          {% if userInfo[0]['id'] == item['user_id'] %}
+          {% if storeResults['userInfoResults'][0]['id'] == item['user_id'] %}
             <a href="/delete/{{item['id']}}" >Delete</a>
           {% endif %}
           </td>
@@ -52,8 +52,8 @@
         </tr>
         {% endfor %}
 
-      {% if  tripsIJoinedResults | length > 0 %}
-        {% for item in tripsIJoinedResults %}
+      {% if  storeResults["tripsIJoinedResults"] | length > 0 %}
+        {% for item in storeResults["tripsIJoinedResults"] %}
         <tr>
           <td>
             <a href="/view/{{item['id']}}">{{item['Plan']}}</a>
@@ -90,8 +90,8 @@
       <tbody>
 
         
-        {% if otherUsersInfoResults | length > 0 %}
-          {% for item in otherUsersInfoResults %}
+        {% if storeResults["otherUsersInfoResults"] | length > 0 %}
+          {% for item in storeResults["otherUsersInfoResults"] %}
       
         <tr> 
             <td><a href="/view/{{item['id']}}">{{item['Plan']}}</a></td>

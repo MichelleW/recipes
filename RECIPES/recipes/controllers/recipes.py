@@ -43,12 +43,14 @@ class Recipes():
     if session['userid']:
       print('logged in success route for userid: ',session['userid'])
       data = {'sessionid':session['userid']}
-      userInfoResults = recipeData.queryUser(data)
-      tripPlanResults = recipeData.queryTripPlan(data)
-      tripsIJoinedResults = recipeData.tripsIJoined(data)
-      otherUsersInfoResults = recipeData.otherUsersInfo(data) 
- 
-      return render_template("welcome.html",userInfo=userInfoResults,tripPlanResults=tripPlanResults,tripsIJoinedResults=tripsIJoinedResults,otherUsersInfoResults=otherUsersInfoResults)
+      storeResults = {
+        'userInfoResults':recipeData.queryUser(data),
+        'tripPlanResults':recipeData.queryTripPlan(data),
+        'tripsIJoinedResults':recipeData.tripsIJoined(data),
+        'otherUsersInfoResults':recipeData.otherUsersInfo(data),
+      }
+
+      return render_template("welcome.html",storeResults=storeResults)
     else:
       print('please login')
     return redirect('/')
